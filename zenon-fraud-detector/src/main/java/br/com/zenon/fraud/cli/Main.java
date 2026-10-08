@@ -1,15 +1,18 @@
 package br.com.zenon.fraud.cli;
 
-import br.com.zenon.fraud.Transaction;
+import br.com.zenon.fraud.model.Transaction;
+import br.com.zenon.fraud.model.TransactionIngestor;
 
-import java.math.BigDecimal;
-
-import static br.com.zenon.fraud.Transaction.TipoTransacao.*;
+import java.io.IOException;
+import java.util.List;
 
 public class Main {
-    void main() {
-        Transaction item1 = new Transaction(743, CASH_OUT, BigDecimal.valueOf(850002.52), "C1280323807", BigDecimal.valueOf(850002.52), BigDecimal.ZERO, "C873221189", BigDecimal.valueOf(6510099.11), BigDecimal.valueOf(7360101.63), true, false);
-        IO.println(item1);
+    void main() throws IOException {
+        TransactionIngestor transactionIngestor = new TransactionIngestor();
+        List<Transaction> transacoes = transactionIngestor.ingerir("data.csv");
 
+        for (int i = 0; i < 10; i++) {
+            IO.println(transacoes.get(i));
+        }
     }
 }
